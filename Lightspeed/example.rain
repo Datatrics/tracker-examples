@@ -1,0 +1,95 @@
+{# snippets/datatrics.rain #}
+{# TRACKER #}
+<script type="text/javascript">
+	var _paq = _paq || [];
+	{% if page.account %}
+		_paq.push(["setCustomData", { "email" : "{{page.account.email}}" }]);
+	{% endif %}
+	_paq.push(["trackPageView"]);
+	_paq.push(["enableLinkTracking"]);
+	(function() {
+		var u="https://tr.datatrics.com/";
+		_paq.push(["setTrackerUrl", u]);
+		_paq.push(["setProjectId", "PROJECTID"]);
+		var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+		g.defer=true; g.async=true; g.src=u; s.parentNode.insertBefore(g,s);
+	})();
+</script>
+{# END TRACKER #}
+{# CATCH MAIL #}
+<script type="text/javascript">
+  $(document).ready(function () {
+	    $("input[id*='email'], input[name*='email'], input[type*='email']" ).focusout(function () {
+	        var DTform = {};
+	        $.each($("form").serializeArray(), function (t, n) {
+	            if(n.name.constructor === Array){
+	            } else{
+		           if(n.value && n.value != '') {
+	               	   DTform[n.name] = n.value
+	               }
+	            }
+	        });
+			if(DTform["customer[email]"]) {
+			  	_paq.push(["setCustomData", { "email" : DTform["customer[email]"] }]);
+			  	_paq.push(['trackPageView']);
+			} else if(DTform['email']) {
+				_paq.push(["setCustomData", { "email" : DTform['email'] }]);
+				_paq.push(['trackPageView']);
+			}
+	    });
+	});
+</script>
+{# END CATCH MAIL #}
+{# CART #}
+{% if page.cart%}
+	<script type="text/javascript">
+    {% for product in page.cart.products %}
+			_paq.push(['addEcommerceItem',
+				"{{ product.id }}",,
+				"{{ product.title }}",
+				{{ product.price.price_incl | number_format(2, '.', '.') }},
+				{{ product.quantity }}
+			]);
+		{% endfor %}
+		_paq.push(['trackEcommerceCartUpdate', {{ page.cart.total.price | number_format(2, '.', '.') }} ]);
+		_paq.push(['trackPageView']);
+	</script>
+{% endif %}
+{# END CART #}
+{# PRODUCT PAGE #}
+{% if template == "pages/product.rain" %}
+	<script type="text/javascript">
+		_paq.push(['setEcommerceView',
+			"{{ product.id }}",
+			"{{ product.title }}",
+			"{{product.brand.title}}",
+			{{ product.price.price_incl | number_format(2, '.', '.') }}
+		]);
+		_paq.push(['trackPageView']);
+	</script>
+{% endif %}
+{# END PRODUCT PAGE #}
+{# CATALOG PAGE #}
+{% if template == "pages/catalog.rain" %}
+	<script type="text/javascript">
+		_paq.push(['setEcommerceView',
+			false,
+			false,
+			"{{catalog.title}}"
+		]);
+		_paq.push(['trackPageView']);
+	</script>
+{% endif %}
+{# END CATALOG PAGE #}
+{# COLLECTION PAGE #}
+{% if template == "pages/collection.rain" %}
+	<script type="text/javascript">
+		_paq.push(['setEcommerceView',
+			false,
+			false,
+			"{{collection.title}}"
+		]);
+		_paq.push(['trackPageView']);
+	</script>
+{% endif %}
+{# END COLLECTION PAGE #}
