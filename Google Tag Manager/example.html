@@ -1,17 +1,6 @@
 <script>
 	var ecommerce = {{datatrics_ecommerce}};
 	if (ecommerce) {
-		if (ecommerce.impressions) {
-			for (var j = 0; j < ecommerce.impressions.length; j++) {
-				var impression = ecommerce.impressions[j];
-				_paq.push(['setEcommerceView',
-					impression.id,
-					impression.name,
-					impression.price
-				]);
-				_paq.push(['trackPageView']);
-			}
-		}
 		if(ecommerce.add){
 			var total = 0;
 			for (var k = 0; k < ecommerce.add.products.length; k++) {
