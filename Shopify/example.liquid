@@ -13,12 +13,13 @@
   {% endif %}
   {% if template.name  == 'cart' %}
     {% for line_item in cart.items %}
-		  {% if line_item.sku == empty %}
+  	{% if line_item.sku == empty %}
     		_paq.push(['addEcommerceItem', "{{ line_item.product_id }}", "{{ line_item.title }}", "", {{ line_item.line_price | money_without_currency }}, {{ line_item.quantity }}]);
     	{% else %}
-    		_paq.push(['addEcommerceItem', "{{ line_item.sku }}", "{{ line_item.title }}", "", {{ line_item.line_price | money_without_currency }}, {{ line_item.quantity }}]);		    	{% endif %}    
-  		{% endfor %}
-	    _paq.push(['trackEcommerceCartUpdate',{{ cart.total_price | money_without_currency }}]);
+    		_paq.push(['addEcommerceItem', "{{ line_item.sku }}", "{{ line_item.title }}", "", {{ line_item.line_price | money_without_currency }}, {{ line_item.quantity }}]);
+	{% endif %}    
+    {% endfor %}
+    _paq.push(['trackEcommerceCartUpdate',{{ cart.total_price | money_without_currency }}]);
   {% endif %}
   {% if customer %}
     _paq.push(["setCustomData", { "profileid" : "{{ customer.id }}", "source": "Shopify" }]);
