@@ -1,0 +1,20 @@
+<script>
+{% for product in order.products %}
+    _paq.push([
+        'addEcommerceItem',
+        "{{ product.id }}",
+        "{{ product.title }}",
+        {{ product.price_excl | number_format(2, '.', '.') }}, {{ product.quantity }}
+    ]);
+{% endfor %}
+_paq.push([
+    'trackEcommerceOrder',
+    "{{ order.information.id }}",
+    {{ order.information.price_incl | number_format(2, '.', '.') }},
+    {{ order.information.price_excl | number_format(2, '.', '.') }},
+    {{ order.information.price_tax | number_format(2, '.', '.') }},
+    {{ order.information.shipping_price | number_format(2, '.', '.') }},
+    false
+]);
+_paq.push(['trackPageView']);
+</script>
