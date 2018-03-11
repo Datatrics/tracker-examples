@@ -6,16 +6,16 @@
   		_paq.push(["setTrackerUrl", u]);
   		_paq.push(["setProjectId", "PROJECTID"]);
   		{% if template.name  == 'product' %}
-    		_paq.push(["setEcommerceView", "{{ product.id|json }}", {{ product.title|json }}, {{ product.collections|map: 'title'|json }}, {{ product.price | money_without_currency }} ]);
+    		_paq.push(["setEcommerceView", "{{ product.id|json }}", {{ product.title|json }}, {{ product.collections|map: 'title'|json }}, {{ product.price|money_without_currency }} ]);
   		{% endif %}
   		{% if template.name  == 'collection' %}
     		_paq.push(["setEcommerceView", false, false, "{{ collection.title }} "]);
   		{% endif %}
-  		{% if template.name  == 'cart' %}
+  		{% if cart.item_count  > 0 %}
     		{% for line_item in cart.items %}
-				_paq.push(["addEcommerceItem", "{{ line_item.product_id|json }}", {{ line_item.title|json }}, {{ line_item.product.collections|map: 'title'|json }}, {{ line_item.line_price | money_without_currency }}, {{ line_item.quantity }}]);
+				    _paq.push(["addEcommerceItem", "{{ line_item.product_id|json }}", {{ line_item.title|json }}, {{ line_item.product.collections|map: 'title'|json }}, {{ line_item.line_price|money_without_currency }}, {{ line_item.quantity }}]);
     		{% endfor %}
-    		_paq.push(["trackEcommerceCartUpdate", {{ cart.total_price | money_without_currency }}]);
+    		_paq.push(["trackEcommerceCartUpdate", {{ cart.total_price|money_without_currency }}]);
   		{% endif %}
   		{% if customer %}
     		_paq.push(["setCustomData", { "profileid" : "{{ customer.id }}", "source": "Shopify" }]);

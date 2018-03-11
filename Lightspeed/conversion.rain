@@ -1,14 +1,16 @@
 <script>
 {% for product in order.products %}
     _paq.push([
-        'addEcommerceItem',
+        "addEcommerceItem",
         "{{ product.id }}",
         "{{ product.title }}",
-        {{ product.price_excl | number_format(2, '.', '.') }}, {{ product.quantity }}
+        "",
+        {{ product.price_incl | number_format(2, '.', '.') }},
+        {{ product.quantity }}
     ]);
 {% endfor %}
 _paq.push([
-    'trackEcommerceOrder',
+    "trackEcommerceOrder",
     "{{ order.information.id }}",
     {{ order.information.price_incl | number_format(2, '.', '.') }},
     {{ order.information.price_excl | number_format(2, '.', '.') }},
@@ -16,5 +18,8 @@ _paq.push([
     {{ order.information.shipping_price | number_format(2, '.', '.') }},
     false
 ]);
+{% if order.customer %}
+  _paq.push(["setCustomData", { "profileid" : "{{order.customer.id}}", "source": "Lightspeed" }]);
+{% endif %}
 _paq.push(['trackPageView']);
 </script>
