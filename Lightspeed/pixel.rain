@@ -35,8 +35,32 @@
 			]);
 	{% endif %}
 	{% if page.account %}
-		_paq.push(["setCustomData", { "profileid" : "{{page.account.id}}", "source": "Lightspeed" }]);
-	{% endif %}
+		_paq.push(["setCustomData", { "profileid" : "{{page.account.id}}", "profilesource": "Lightspeed" }]);
+	{% endif %}	
+	{% if template == "pages/thankyou.rain" %}
+		{% for product in order.products %}
+			_paq.push([
+				"addEcommerceItem",
+				"{{ product.id }}",
+				"{{ product.title }}",
+				"",
+				{{ product.price_incl | number_format(2, '.', '.') }},
+				{{ product.quantity }}
+			]);
+		{% endfor %}
+		_paq.push([
+			"trackEcommerceOrder",
+			"{{ order.information.id }}",
+			{{ order.information.price_incl | number_format(2, '.', '.') }},
+			{{ order.information.price_excl | number_format(2, '.', '.') }},
+			{{ order.information.price_tax | number_format(2, '.', '.') }},
+			{{ order.information.shipping_price | number_format(2, '.', '.') }},
+			false
+		]);
+		{% if order.customer %}
+			_paq.push(["setCustomData", { "profileid" : "{{order.customer.id}}", "profilesource": "Lightspeed" }]);
+		{% endif %}
+	{% endif %}	
 	_paq.push(["trackPageView"]);
 	_paq.push(["enableLinkTracking"]);
 	(function() {
