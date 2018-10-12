@@ -1,0 +1,78 @@
+<script>
+	var _paq = _paq || [];
+	var ecommerce = {{datatrics_ecommerce}};	
+	if (ecommerce) {
+		if(ecommerce.add){
+			var total = 0;
+			for (var k = 0; k < ecommerce.add.products.length; k++) {
+				var product = ecommerce.add.products[k];
+				total += product.price;
+				_paq.push(['addEcommerceItem',
+					product.id,
+					product.name,
+					product.category,
+					product.price,
+					product.quantity
+				]);
+			}
+			_paq.push(['trackEcommerceCartUpdate', total]);
+		}
+		if(ecommerce.detail){
+			for (var k = 0; k < ecommerce.detail.products.length; k++) {
+				var product = ecommerce.detail.products[k];
+				_paq.push(['setEcommerceView',
+					product.id,
+					product.name,
+					product.price
+				]);
+			}
+		}
+		if(ecommerce.checkout){
+			var total = 0;
+			for (var k = 0; k < ecommerce.checkout.products.length; k++) {
+				var product = ecommerce.checkout.products[k];
+				total += product.price;
+				_paq.push(['addEcommerceItem',
+					product.id,
+					product.name,
+					product.category,
+					product.price,
+					product.quantity
+				]);
+			}
+			_paq.push(['trackEcommerceCartUpdate', total]);
+		}
+		if(ecommerce.purchase){
+			var total = 0;
+			for (var k = 0; k < ecommerce.purchase.products.length; k++) {
+				var product = ecommerce.purchase.products[k];
+				total += product.price;
+				_paq.push(['addEcommerceItem',
+					product.id,
+					product.name,
+					product.category,
+					product.price,
+					product.quantity
+				]);
+			}
+			_paq.push(['trackEcommerceOrder',
+				ecommerce.purchase.actionField.id,
+				ecommerce.purchase.actionField.revenue,
+				ecommerce.purchase.actionField.revenue-ecommerce.purchase.actionField.tax,
+				ecommerce.purchase.actionField.tax,
+				ecommerce.purchase.actionField.shipping,
+				false
+			]);
+		}
+	}
+	_paq.push(["trackPageView"]);
+	_paq.push(["enableLinkTracking"]);
+	(function() {
+		var u=(("https:" == document.location.protocol) ? "https" : "http") + "://tr.datatrics.com/";
+		_paq.push(["setTrackerUrl", u]);
+		_paq.push(["setProjectId", "PROJECTID"]);
+		var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+		g.type="text/javascript";
+		g.defer=true; g.async=true; g.src=u; s.parentNode.insertBefore(g,s);
+	})();
+</script>
