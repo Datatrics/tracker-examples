@@ -5,7 +5,7 @@
 			var total = 0;
 			for (var k = 0; k < ecommerce.add.products.length; k++) {
 				var product = ecommerce.add.products[k];
-				total += product.price;
+				total += parseFloat(product.price);
 				_paq.push(['addEcommerceItem',
 					product.id,
 					product.name,
@@ -14,7 +14,7 @@
 					product.quantity
 				]);
 			}
-			_paq.push(['trackEcommerceCartUpdate', total]);
+			_paq.push(['trackEcommerceCartUpdate', parseFloat(total)]);
 			_paq.push(['trackPageView']);
 		}
 		if(ecommerce.detail){
@@ -33,7 +33,7 @@
 			var total = 0;
 			for (var k = 0; k < ecommerce.checkout.products.length; k++) {
 				var product = ecommerce.checkout.products[k];
-				total += product.price;
+				total += parseFloat(product.price);
 				_paq.push(['addEcommerceItem',
 					product.id,
 					product.name,
@@ -42,14 +42,12 @@
 					product.quantity
 				]);
 			}
-			_paq.push(['trackEcommerceCartUpdate', total]);
+			_paq.push(['trackEcommerceCartUpdate', parseFloat(total)]);
 			_paq.push(['trackPageView']);
 		}
 		if(ecommerce.purchase){
-			var total = 0;
 			for (var k = 0; k < ecommerce.purchase.products.length; k++) {
 				var product = ecommerce.purchase.products[k];
-				total += product.price;
 				_paq.push(['addEcommerceItem',
 					product.id,
 					product.name,
