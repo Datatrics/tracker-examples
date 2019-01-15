@@ -3,7 +3,7 @@
 	{% if page.cart %}
 	  {% for product in page.cart.products %}
 			_paq.push(["addEcommerceItem",
-				"{{ product.id }}",,
+				"{{ product.id }}",
 				"{{ product.title }}",
 				"",
 				{{ product.price.price_incl | number_format(2, '.', '.') }},
