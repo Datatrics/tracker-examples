@@ -33,9 +33,6 @@
 				false,
 				"{{collection.title}}"
 			]);
-	{% endif %}
-	{% if page.account %}
-		_paq.push(["setCustomData", { "profileid" : "{{page.account.id}}", "profilesource": "Lightspeed" }]);
 	{% endif %}	
 	{% if template == "pages/thankyou.rain" %}
 		{% for product in order.products %}
@@ -59,6 +56,10 @@
 		]);
 		{% if order.customer %}
 			_paq.push(["setCustomData", { "profileid" : "{{order.customer.id}}", "profilesource": "Lightspeed" }]);
+		{% endif %}
+	{% else %}	
+		{% if page.account %}
+			_paq.push(["setCustomData", { "profileid" : "{{page.account.id}}", "profilesource": "Lightspeed" }]);
 		{% endif %}
 	{% endif %}	
 	_paq.push(["trackPageView"]);
