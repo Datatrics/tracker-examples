@@ -6,18 +6,18 @@
 				"{{ product.id }}",
 				"{{ product.title }}",
 				"",
-				{{ product.price.price_incl | number_format(2, '.', '.') }},
+				{{ product.price.price_incl | number_format(2, '.', '') }},
 				{{ product.quantity }}
 			]);
 		{% endfor %}
-		_paq.push(["trackEcommerceCartUpdate", {{ page.cart.total.price | number_format(2, '.', '.') }} ]);
+		_paq.push(["trackEcommerceCartUpdate", {{ page.cart.total.price | number_format(2, '.', '') }} ]);
 	{% endif %}
 	{% if template == "pages/product.rain" %}
 			_paq.push(["setEcommerceView",
 				"{{ product.id }}",
 				"{{ product.title }}",
 				"{{product.brand.title}}",
-				{{ product.price.price_incl | number_format(2, '.', '.') }}
+				{{ product.price.price_incl | number_format(2, '.', '') }}
 			]);
 	{% endif %}
 	{% if template == "pages/catalog.rain" %}
@@ -41,17 +41,17 @@
 				"{{ product.id }}",
 				"{{ product.title }}",
 				"",
-				{{ product.price_incl | number_format(2, '.', '.') }},
+				{{ product.price_incl | number_format(2, '.', '') }},
 				{{ product.quantity }}
 			]);
 		{% endfor %}
 		_paq.push([
 			"trackEcommerceOrder",
 			"{{ order.information.id }}",
-			{{ order.information.price_incl | number_format(2, '.', '.') }},
-			{{ order.information.price_excl | number_format(2, '.', '.') }},
-			{{ order.information.price_tax | number_format(2, '.', '.') }},
-			{{ order.information.shipping_price | number_format(2, '.', '.') }},
+			{{ order.information.price_incl | number_format(2, '.', '') }},
+			{{ order.information.price_excl | number_format(2, '.', '') }},
+			{{ order.information.price_tax | number_format(2, '.', '') }},
+			{{ order.information.shipping_price | number_format(2, '.', '') }},
 			false
 		]);
 		{% if order.customer %}
