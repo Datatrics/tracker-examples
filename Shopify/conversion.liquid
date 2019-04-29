@@ -10,7 +10,7 @@
   {% endfor %}
   _paq.push(["trackEcommerceOrder","{{ order_number }}", {{ total_price|money_without_currency }}]);
   {% if order.customer %}
-    _paq.push(["setCustomData", { "profileid" : "{{ customer.id }}", "source": "Shopify" }]);
+    _paq.push(["setCustomData", { "profileid" : "{{ customer.id }}", "profilesource": "Shopify" }]);
   {% endif %}
   _paq.push(["trackPageView"]);
   _paq.push(["enableLinkTracking"]);
