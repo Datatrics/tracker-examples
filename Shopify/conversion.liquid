@@ -1,19 +1,19 @@
-<!-- Datatrics -->
-  <script type="text/javascript">
-  var _paq = _paq || [];
-  (function() {
-  var u="https://tr.datatrics.com/";
-  _paq.push(["setTrackerUrl", u]);
-  _paq.push(["setProjectId", "PROJECTID"]);
-  {% for line_item in line_items %}
-    _paq.push(["addEcommerceItem", "{{ line_item.product_id|json }}", {{ line_item.title|json }}, {{ line_item.product.collections|map: 'title'|json }}, {{ line_item.line_price|money_without_currency }}, {{ line_item.quantity }}]);
-  {% endfor %}
-  _paq.push(["trackEcommerceOrder","{{ order_number }}", {{ total_price|money_without_currency }}]);
-  {% if order.customer %}
-    _paq.push(["setCustomData", { "profileid" : "{{ customer.id }}", "profilesource": "Shopify" }]);
-  {% endif %}
-  _paq.push(["trackPageView"]);
-  _paq.push(["enableLinkTracking"]);
-  var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];g.type="text/javascript";g.defer=true; g.async=true; g.src=u; s.parentNode.insertBefore(g,s);})();
-  </script>
-<!-- End Datatrics -->
+<script type="text/javascript">
+	var _paq = _paq || [];
+	{% for line_item in line_items %}
+		_paq.push(["addEcommerceItem", "{{ line_item.product_id|json }}", {{ line_item.title|json }}, {{ line_item.product.collections|map: 'title'|json }}, {{ line_item.line_price|money_without_currency }}, {{ line_item.quantity }}]);
+	{% endfor %}
+	_paq.push(["trackEcommerceOrder","{{ order_number }}", {{ total_price|money_without_currency }}]);
+	{% if order.customer %}
+		_paq.push(["setCustomData", { "profileid" : "{{ customer.id }}", "profilesource": "Shopify" }]);
+	{% endif %}
+	_paq.push(["trackPageView"]);
+	_paq.push(["enableLinkTracking"]);
+	(function() {
+		var u="https://tr.datatrics.com/";
+		_paq.push(["setTrackerUrl", u]);
+		_paq.push(["setProjectId", "PROJECTID"]);
+		var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0]; g.type="text/javascript";
+		g.defer=true; g.async=true; g.src=u; s.parentNode.insertBefore(g,s);
+	})();
+</script>
