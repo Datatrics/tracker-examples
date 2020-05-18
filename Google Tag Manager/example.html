@@ -8,7 +8,7 @@
 					var product = ecommerce.add.products[k];
 					total += parseFloat(product.price);
 					_paq.push(['addEcommerceItem',
-						product.id,
+						product.id.toString(),
 						product.name,
 						product.category,
 						product.price,
@@ -24,7 +24,7 @@
 				for (var k = 0; k < ecommerce.detail.products.length; k++) {
 					var product = ecommerce.detail.products[k];
 					_paq.push(['setEcommerceView',
-						product.id,
+						product.id.toString(),
 						product.name,
 						product.category,
 						product.price
@@ -36,7 +36,7 @@
 				var product = ecommerce.detail.product;
 				if(!product.category){ product.category = ''; }
 				_paq.push(['setEcommerceView',
-					product.id,
+					product.id.toString(),
 					product.name,
 					product.category,
 					product.price
@@ -51,7 +51,7 @@
 					var product = ecommerce.checkout.products[k];
 					total += parseFloat(product.price);
 					_paq.push(['addEcommerceItem',
-						product.id,
+						product.id.toString(),
 						product.name,
 						product.category,
 						product.price,
@@ -67,7 +67,7 @@
 				for (var k = 0; k < ecommerce.purchase.products.length; k++) {
 					var product = ecommerce.purchase.products[k];
 					_paq.push(['addEcommerceItem',
-						product.id,
+						product.id.toString(),
 						product.name,
 						product.category,
 						product.price,
