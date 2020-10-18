@@ -6,7 +6,7 @@
 				var total = 0;
 				for (var k = 0; k < ecommerce.add.products.length; k++) {
 					var product = ecommerce.add.products[k];
-					total += parseFloat(product.price);
+					total += parseFloat(product.price) * parseFloat(product.quantity);
 					_paq.push(['addEcommerceItem',
 						product.id.toString(),
 						product.name,
@@ -49,7 +49,7 @@
 				var total = 0;
 				for (var k = 0; k < ecommerce.checkout.products.length; k++) {
 					var product = ecommerce.checkout.products[k];
-					total += parseFloat(product.price);
+					total += parseFloat(product.price) * parseFloat(product.quantity);
 					_paq.push(['addEcommerceItem',
 						product.id.toString(),
 						product.name,
