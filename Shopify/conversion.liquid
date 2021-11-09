@@ -1,9 +1,9 @@
 <script type="text/javascript">
 	var _paq = _paq || [];
 	{% for line_item in line_items %}
-		_paq.push(["addEcommerceItem", "{{ line_item.product_id|json }}", {{ line_item.title|json }}, {{ line_item.product.collections|map: 'title'|json }}, {{ line_item.line_price|money_without_currency|json }}, {{ line_item.quantity }}]);
+		_paq.push(["addEcommerceItem", "{{ line_item.product_id|json }}", {{ line_item.title|json }}, {{ line_item.product.collections|map: 'title'|json }}, {{ line_item.line_price|money_without_currency|replace: ",", "."  }}, {{ line_item.quantity }}]);
 	{% endfor %}
-	_paq.push(["trackEcommerceOrder","{{ order_number }}", {{ total_price|money_without_currency|json }}]);
+	_paq.push(["trackEcommerceOrder","{{ order_number }}", {{ total_price|money_without_currency|replace: ",", "." }}]);
 	{% if order.customer %}
 		_paq.push(["setCustomData", { "profileid" : "{{ customer.id }}", "profilesource": "Shopify" }]);
 	{% endif %}
